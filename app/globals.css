@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg:#FFFFFF; --surface:#F6F8F8; --line:#E5EAE9; --line-strong:#D2DBD9;
+  --ink:#111918; --soft:#33403D; --muted:#64716E; --faint:#99A5A2;
+  /* brand: deep teal (buttons, links, highlights) + the logo / Record tile gradient */
+  --primary:#0E8C7E; --primary-600:#0A7366; --primary-50:#EBF7F5; --primary-100:#CDEDE8; --primary-rgb:14 140 126;
+  --brand-a:#2BC2AC; --brand-b:#0E8C7E; --brand-c:#0A665C;
+  --danger:#D14343; --danger-50:#FDF0F0;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --nav-h:60px;
+  /* legacy aliases — keep stray classes rendering on-palette */
+  --paper:var(--bg); --card:var(--bg); --accent:var(--primary);
+  --page:#F3F6F5; --shadow:17 25 24; --sk-a:#ECF1F0; --sk-b:#F5F8F7;
+  /* note types: accent (text/dots), card surface, card edge */
+  --t-idea:#B26B00;    --t-idea-bg:#FFF6E5;    --t-idea-line:#F2C46D;
+  --t-task:#1F7A8C;    --t-task-bg:#E8F5F8;    --t-task-line:#8CCAD6;
+  --t-note:#4B5565;    --t-note-bg:#F1F2F5;    --t-note-line:#C4C9D3;
+  --t-person:#2F8A57;  --t-person-bg:#E9F6EE;  --t-person-line:#95CFAD;
+  --t-link:#2C6FD1;    --t-link-bg:#EBF2FD;    --t-link-line:#9DBDF0;
+  --t-expense:#C2462E; --t-expense-bg:#FDEFEB; --t-expense-line:#EFA594;
+  --t-journal:#C23A78; --t-journal-bg:#FCEDF4; --t-journal-line:#E9A0C2;
+  /* map + clusters: what a hub is (place, person, official/department, group/media, issue, topic) */
+  --k-place:#4F74D9;    --k-place-bg:#E9EFFC;
+  --k-person:#D2604F;   --k-person-bg:#FCEDEA;
+  --k-official:#1E93B5; --k-official-bg:#E4F4F9;
+  --k-group:#9C7F52;    --k-group-bg:#F5EFE6;
+  --k-issue:#C9549A;    --k-issue-bg:#FBEAF4;
+  --k-topic:#5E6A80;    --k-topic-bg:#EEF0F4;
+  /* category tints (lib/buckets.ts) */
+  --c-coral-bg:#FBD3CF;    --c-coral-line:#F2A69E;
+  --c-peach-bg:#FBE1C6;    --c-peach-line:#F0BC86;
+  --c-sand-bg:#F3EADB;     --c-sand-line:#DCCAA8;
+  --c-lemon-bg:#FFF4BD;    --c-lemon-line:#EEDB7A;
+  --c-mint-bg:#D7F3E3;     --c-mint-line:#A3DCBD;
+  --c-sage-bg:#E4EDD8;     --c-sage-line:#BED2A5;
+  --c-sky-bg:#D7EAF7;      --c-sky-line:#A3CBE8;
+  --c-mist-bg:#E6EAF0;     --c-mist-line:#C3CBD7;
+  --c-lavender-bg:#E9E0F8; --c-lavender-line:#C7B5EC;
+  --c-blush-bg:#F9E0EA;    --c-blush-line:#EAB3CA;
+  /* custom hex swatches are mixed into the page: color-mix(hex pct, base) */
+  --cm-base:#FFFFFF; --cm-bg:42%; --cm-line:70%;
+}
+/* Dark tokens are scoped to the element carrying data-theme (the notes page root), so /login stays light. */
+[data-theme="dark"] {
+  --bg:#121817; --surface:#18201F; --line:#24302E; --line-strong:#33423F;
+  --ink:#EDF3F1; --soft:#C2CFCB; --muted:#8C9B97; --faint:#62716D;
+  --primary:#2FC6B1; --primary-600:#52D5C3; --primary-50:#0F2724; --primary-100:#173C37; --primary-rgb:47 198 177;
+  --brand-a:#3FD3BD; --brand-b:#15A08F; --brand-c:#0C7368;
+  --danger:#F07171; --danger-50:#2A1717;
+  --page:#0B1110; --shadow:0 0 0; --sk-a:#18201F; --sk-b:#1F2928;
+  --t-idea:#F0B44C;    --t-idea-bg:#2A2113;    --t-idea-line:#6B4E1C;
+  --t-task:#5CC3D6;    --t-task-bg:#132629;    --t-task-line:#245761;
+  --t-note:#A5ADBD;    --t-note-bg:#1E2028;    --t-note-line:#434858;
+  --t-person:#66CC92;  --t-person-bg:#142620;  --t-person-line:#285A3E;
+  --t-link:#7AA8F5;    --t-link-bg:#161F33;    --t-link-line:#2E4A7A;
+  --t-expense:#F08A73; --t-expense-bg:#2C1915; --t-expense-line:#6E3326;
+  --t-journal:#EE7FB0; --t-journal-bg:#2B1622; --t-journal-line:#6A2D4A;
+  --k-place:#6F95E8;    --k-place-bg:#18223A;
+  --k-person:#F0897B;   --k-person-bg:#2E1A17;
+  --k-official:#6CC6E0; --k-official-bg:#12262E;
+  --k-group:#C2AA82;    --k-group-bg:#2A2419;
+  --k-issue:#E08DC2;    --k-issue-bg:#2E1726;
+  --k-topic:#A3ADBF;    --k-topic-bg:#1F232C;
+  --c-coral-bg:#4A2522;    --c-coral-line:#6E3631;
+  --c-peach-bg:#47301C;    --c-peach-line:#694627;
+  --c-sand-bg:#37322A;     --c-sand-line:#51493B;
+  --c-lemon-bg:#433D1C;    --c-lemon-line:#635A2A;
+  --c-mint-bg:#1D3A31;     --c-mint-line:#2B5446;
+  --c-sage-bg:#28331F;     --c-sage-line:#3B4B2D;
+  --c-sky-bg:#1C3243;      --c-sky-line:#29495F;
+  --c-mist-bg:#272C34;     --c-mist-line:#3A414C;
+  --c-lavender-bg:#30264A; --c-lavender-line:#463766;
+  --c-blush-bg:#412432;    --c-blush-line:#5E3448;
+  --cm-base:#121817; --cm-bg:26%; --cm-line:42%;
+  color-scheme: dark;
+}
+[data-theme="light"] { color-scheme: light; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: Geist, system-ui, sans-serif; font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+h1, h2, h3 { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 600; letter-spacing: -0.015em; }
+::selection { background: var(--primary-100); }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; border-radius: 8px; }
+input:focus-visible, textarea:focus-visible, select:focus-visible { outline: none; }
+.field:focus { border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-100); }
+
+@layer components {
+.field { transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease); }
+.card { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; transition: border-color 160ms var(--ease), box-shadow 160ms var(--ease); }
+/* buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .4rem; border-radius: 10px; font-weight: 500;
+  transition: background-color 160ms var(--ease), color 160ms var(--ease), border-color 160ms var(--ease), opacity 160ms var(--ease), transform 120ms var(--ease); }
+.btn:active:not(:disabled) { transform: scale(.97); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover:not(:disabled) { background: var(--primary-600); }
+.btn-ghost { background: var(--bg); color: var(--soft); border: 1px solid var(--line); }
+.btn-ghost:hover:not(:disabled) { border-color: var(--line-strong); color: var(--ink); background: var(--surface); }
+.btn-press:active { transform: scale(.97); }
+/* faint ink wash for sections sitting on a colored note surface */
+.wash { background: color-mix(in srgb, var(--ink) 5%, transparent); }
+.on-tint .btn:not(.btn-primary):hover:not(:disabled) { background: color-mix(in srgb, var(--ink) 8%, transparent); }
+
+}
+
+/* motion — short, eased, and answering the user's action */
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes pop { from { opacity: 0; transform: translateY(6px) scale(.985); } to { opacity: 1; transform: none; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+@keyframes ring { 0% { box-shadow: 0 0 0 0 rgb(var(--primary-rgb) / .45); } 100% { box-shadow: 0 0 0 12px rgb(var(--primary-rgb) / 0); } }
+@keyframes shake { 0%,100% { transform: none; } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+.anim-enter { animation: rise 220ms var(--ease) both; }
+.anim-pop { animation: pop 320ms var(--ease) both; }
+.anim-fade { animation: fade 200ms var(--ease) both; }
+.stagger > * { animation: rise 280ms var(--ease) both; animation-delay: calc(var(--i, 0) * 35ms); }
+.pulse { animation: ring 1.3s var(--ease) infinite; }
+.shake { animation: shake 260ms var(--ease); }
+.spinner { width: 14px; height: 14px; border-radius: 999px; border: 2px solid rgb(255 255 255 / .4); border-top-color: #fff; animation: spin 700ms linear infinite; }
+.chip-lift { transition: background-color 160ms var(--ease), color 160ms var(--ease), border-color 160ms var(--ease); }
+.skeleton { background: linear-gradient(90deg, var(--sk-a) 25%, var(--sk-b) 50%, var(--sk-a) 75%); background-size: 800px 100%; animation: shimmer 1.4s linear infinite; }
+
+/* collapsible: grid-rows 0fr → 1fr animates to intrinsic height */
+.reveal { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 260ms var(--ease), opacity 200ms var(--ease); }
+.reveal > * { overflow: hidden; min-height: 0; }
+.reveal[data-open="true"] { grid-template-rows: 1fr; opacity: 1; }
+
+/* segmented toggle with sliding pill */
+.seg { position: relative; display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 3px; }
+.seg-pill { position: absolute; top: 3px; bottom: 3px; left: 3px; border-radius: 7px; background: var(--bg); box-shadow: 0 1px 2px rgb(23 21 31 / .08), 0 0 0 1px var(--line); transition: transform 260ms var(--ease); }
+
+.no-scrollbar { scrollbar-width: none; scroll-behavior: smooth; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.kbd { display: inline-flex; align-items: center; gap: 2px; height: 20px; padding: 0 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); font-size: 11px; color: var(--muted); font-family: inherit; }
+
+.scroll-anchor { scroll-margin-top: calc(var(--nav-h) + 16px); }
+/* notes header wraps search onto a second row on phones */
+@media (max-width: 639px) { [data-theme] { --nav-h: 112px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; animation-delay: 0ms !important; transition-duration: 1ms !important; }
+}
+
+/* Map tree (components/TopicTree.tsx): each row's tap target, tinted on hover. */
+.tree-hit { fill: transparent; transition: fill 140ms var(--ease); }
+g:hover > .tree-hit { fill: color-mix(in srgb, var(--ink) 6%, transparent); }
+
+/* Side panel (components/HubPanel.tsx) slides in from the right. */
+.panel-in { animation: panel-in 260ms var(--ease) both; }
+@keyframes panel-in { from { transform: translateX(32px); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .panel-in { animation: none; } }
+
+/* The page itself follows the theme (login included); set on <html> before first paint (app/layout.tsx). */
+html, body { background: var(--page); color: var(--ink); }
+.brand-gradient { background: linear-gradient(140deg, var(--brand-a) 0%, var(--brand-b) 55%, var(--brand-c) 100%); }
+
+/* Map: a lit connection flows toward the note it leads to. */
+@keyframes map-flow { to { stroke-dashoffset: -24; } }
+.map-flow { animation: map-flow .9s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .map-flow { animation: none; } }
+
+/* Notes: the rich editor (components/RichEditor.tsx) and laid-out note text (components/NoteText.tsx) share a look. */
+.rich-editor { font-size: 15.5px; line-height: 1.65; color: var(--soft); }
+.rich-editor > * + *, .note-text > * + * { margin-top: .45em; }
+.rich-editor h1, .note-text h1 { font-size: 1.35em; font-weight: 700; color: var(--ink); line-height: 1.3; }
+.rich-editor h2, .note-text h2 { font-size: 1.15em; font-weight: 650; color: var(--ink); line-height: 1.35; }
+.rich-editor h3, .note-text h3 { font-size: 1em; font-weight: 650; color: var(--ink); }
+.rich-editor strong, .note-text strong { color: var(--ink); font-weight: 650; }
+.rich-editor ul, .note-text ul { list-style: disc; padding-left: 1.3em; }
+.rich-editor ol, .note-text ol { list-style: decimal; padding-left: 1.4em; }
+.rich-editor li::marker, .note-text li::marker { color: var(--faint); }
+.rich-editor li > p { margin: 0; }
+.rich-editor ul[data-type="taskList"], .note-text ul.tasks { list-style: none; padding-left: .1em; }
+.rich-editor ul[data-type="taskList"] li { display: flex; align-items: flex-start; gap: .5em; }
+.rich-editor ul[data-type="taskList"] li > label { margin-top: .3em; }
+.rich-editor ul[data-type="taskList"] li > div { flex: 1; }
+.rich-editor ul[data-type="taskList"] li[data-checked="true"] > div { text-decoration: line-through; color: var(--faint); }
+.rich-editor input[type="checkbox"], .note-text input[type="checkbox"] { accent-color: var(--primary); width: 15px; height: 15px; }
+.rich-editor p.is-editor-empty:first-child::before { content: attr(data-placeholder); color: var(--faint); float: left; height: 0; pointer-events: none; }
+.rich-editor:focus, .rich-editor:focus-visible { outline: none; box-shadow: none; }
